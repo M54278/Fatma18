@@ -19,7 +19,7 @@
             overflow-x: hidden;
             text-align: center;
         }
-        /* الورود والبالونات المتساقطة في الخلفية دائماً */
+        /* الورود والإيموشن المتساقط في الخلفية دائماً */
         .rose, .balloon {
             position: fixed;
             top: -10vh;
@@ -33,7 +33,7 @@
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0.3; }
         }
 
-        /* واجهة كلمة السر (واجهة عيد ميلاد فخمة) */
+        /* واجهة كلمة السر */
         #login-screen {
             position: fixed;
             top: 0;
@@ -107,10 +107,11 @@
             margin: 0 auto;
         }
         .header-title {
-            font-size: 22px;
+            font-size: 24px;
             color: #d81b60;
             margin: 20px 0;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         /* العداد التنازلي */
@@ -248,7 +249,7 @@
 </head>
 <body>
 
-    <!-- واجهة كلمة السر (تتضمن ورود متساقطة في الخلفية) -->
+    <!-- واجهة كلمة السر -->
     <div id="login-screen">
         <div class="login-card">
             <h2>🎉 دوسي يا فطومة 💖</h2>
@@ -260,7 +261,8 @@
 
     <!-- المحتوى الرئيسي -->
     <div id="main-content">
-        <div class="header-title">✨ عيد ميلاد سعيد يا فطومة ✨</div>
+        <!-- تم تعديل العنوان بناءً على طلبك -->
+        <div class="header-title">🎀 جمــــــــيـــــــله اكتـــــــوبـــــــر 🎀</div>
 
         <div class="countdown-title">فاضل علي اكتمال القمر 🎀🎉</div>
         <div class="countdown-container">
@@ -325,7 +327,7 @@
             if(pass === "2008") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
-                startBalloons(); // إطلاق البالونات عند الدخول
+                startCelebration(); 
             } else {
                 errorMsg.style.display = 'block';
             }
@@ -366,32 +368,27 @@
         }
         setInterval(updateCountdown, 1000);
 
-        // إنشاء ورود متساقطة في الخلفية دائماً (من أول واجهة)
-        function createRose() {
-            const rose = document.createElement('div');
-            rose.classList.add('rose');
-            rose.innerHTML = '🌹';
-            rose.style.left = Math.random() * 100 + 'vw';
-            rose.style.fontSize = (Math.random() * 15 + 15) + 'px';
-            rose.style.animationDuration = (Math.random() * 4 + 3) + 's';
-            document.body.appendChild(rose);
-            setTimeout(() => rose.remove(), 7000);
+        // إنشاء الورد والإيموشن المتساقط (تكامل الورد مع 🎉)
+        function createFallingItem() {
+            const item = document.createElement('div');
+            item.classList.add('rose');
+            // مزيج من الورود وإيموشن الاحتفال المطلوب
+            const symbols = ['🌹', '🌸', '🎉', '💐', '🌷'];
+            item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.fontSize = (Math.random() * 18 + 16) + 'px';
+            item.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            document.body.appendChild(item);
+            setTimeout(() => item.remove(), 7000);
         }
-        setInterval(createRose, 400);
+        setInterval(createFallingItem, 350);
 
-        // إطلاق بالونات عند الدخول بعد كلمة السر
-        function startBalloons() {
-            for(let i=0; i<15; i++) {
+        // إتاحة احتفال إضافي عند الدخول
+        function startCelebration() {
+            for(let i=0; i<20; i++) {
                 setTimeout(() => {
-                    const balloon = document.createElement('div');
-                    balloon.classList.add('balloon');
-                    balloon.innerHTML = '🎈';
-                    balloon.style.left = Math.random() * 100 + 'vw';
-                    balloon.style.fontSize = (Math.random() * 20 + 20) + 'px';
-                    balloon.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    document.body.appendChild(balloon);
-                    setTimeout(() => balloon.remove(), 5000);
-                }, i * 200);
+                    createFallingItem();
+                }, i * 150);
             }
         }
     </script>
