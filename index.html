@@ -19,8 +19,8 @@
             overflow-x: hidden;
             text-align: center;
         }
-        /* الورود والإيموشن المتساقط في الخلفية دائماً */
-        .rose, .balloon {
+        /* الورود المتساقطة في الخلفية دائماً */
+        .rose {
             position: fixed;
             top: -10vh;
             z-index: 999;
@@ -252,7 +252,7 @@
     <!-- واجهة كلمة السر -->
     <div id="login-screen">
         <div class="login-card">
-            <h2>🎉 دوسي يا فطومة 💖</h2>
+            <h2>دوسي يا فطومة 💖</h2>
             <input type="password" id="pass-input" placeholder="اكتبي كلمة السر...">
             <button onclick="checkPassword()">دوسي هنا يا فاطمه 🎀</button>
             <div id="error-msg" class="error-msg">كلمة السر خطأ، جربي تاني يا فطومة!</div>
@@ -261,7 +261,7 @@
 
     <!-- المحتوى الرئيسي -->
     <div id="main-content">
-        <!-- تم تعديل العنوان بناءً على طلبك -->
+        <!-- العنوان المطلوب فقط -->
         <div class="header-title">🎀 جمــــــــيـــــــله اكتـــــــوبـــــــر 🎀</div>
 
         <div class="countdown-title">فاضل علي اكتمال القمر 🎀🎉</div>
@@ -274,7 +274,7 @@
 
         <!-- مشغل الأغنية الدوار تحت العداد -->
         <div class="music-player">
-            <button class="play-btn" id="playBtn" onclick="togglePlay()"><i class="fa-solid fa-play" id="playIcon"></i></button>
+            <button class="play-btn" id="playBtn" onclick="togglePlay()"><i class="fa-solid fa-pause" id="playIcon"></i></button>
             <span style="font-weight:600; font-size:13px; color:#d81b60;">موسيقى عيد الميلاد الخاصة بك 🤍</span>
             <img src="IMG-20261002-WA0004.jpg" class="album-art" alt="Album Art">
         </div>
@@ -289,7 +289,7 @@
 اللّٰهـم عامـاً دون فقـد و دون حـزن و دون خيبـه اللّٰهـم عامـاً يتحقـق فيـه گـل ماأتمنـى⁦⁩🤍
 اللّهُمّ إنّي استودِعُك بُعمري خيراً ، فـ اغفِر لي ما مضَى ، وبارك لي فيما هُوَ آتٍ !
 أتمني كل سنه أكتب بوست عيدميلادي وأهلي وصحابي وكل حد بحبه معايا..❤️
-و بما إن النهارده عيد ميلادى اجمل هديه ممكن حد يقدمها ليا هي دعوه حلوه من القلب ❤️🫀✨
+و بما إن النهارده عيد ميلادى اجمل هديه ممكن حد قدمها ليا هي دعوه حلوه من القلب ❤️🫀✨
 كُن لطيفاً يا أكتوبر ففيكَ إلتقطتُ أول أنفاسي..!🤍</div>
 
         <!-- الصور والتواريخ -->
@@ -320,20 +320,27 @@
     </div>
 
     <script>
-        // التحقق من كلمة السر
+        // التحقق من كلمة السر وتشغيل الأغنية تلقائياً
         function checkPassword() {
             const pass = document.getElementById('pass-input').value.trim();
             const errorMsg = document.getElementById('error-msg');
             if(pass === "2008") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
+                
+                // تشغيل الأغنية تلقائياً فور كتابة كلمة السر والدخول
+                const music = document.getElementById('bgMusic');
+                music.play().catch(error => {
+                    console.log("Autoplay prevented:", error);
+                });
+
                 startCelebration(); 
             } else {
                 errorMsg.style.display = 'block';
             }
         }
 
-        // تشغيل وإيقاف الأغنية
+        // تشغيل وإيقاف الأغنية يدوياً من الزرار
         const music = document.getElementById('bgMusic');
         const playIcon = document.getElementById('playIcon');
         function togglePlay() {
@@ -368,26 +375,25 @@
         }
         setInterval(updateCountdown, 1000);
 
-        // إنشاء الورد والإيموشن المتساقط (تكامل الورد مع 🎉)
-        function createFallingItem() {
-            const item = document.createElement('div');
-            item.classList.add('rose');
-            // مزيج من الورود وإيموشن الاحتفال المطلوب
-            const symbols = ['🌹', '🌸', '🎉', '💐', '🌷'];
-            item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-            item.style.left = Math.random() * 100 + 'vw';
-            item.style.fontSize = (Math.random() * 18 + 16) + 'px';
-            item.style.animationDuration = (Math.random() * 4 + 3) + 's';
-            document.body.appendChild(item);
-            setTimeout(() => item.remove(), 7000);
+        // إنشاء الورود فقط لتتساقط في الخلفية
+        function createRose() {
+            const rose = document.createElement('div');
+            rose.classList.add('rose');
+            const roses = ['🌹', '🌸', '💐', '🌷'];
+            rose.innerHTML = roses[Math.floor(Math.random() * roses.length)];
+            rose.style.left = Math.random() * 100 + 'vw';
+            rose.style.fontSize = (Math.random() * 18 + 16) + 'px';
+            rose.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            document.body.appendChild(rose);
+            setTimeout(() => rose.remove(), 7000);
         }
-        setInterval(createFallingItem, 350);
+        setInterval(createRose, 350);
 
-        // إتاحة احتفال إضافي عند الدخول
+        // احتفال ورود إضافي عند الدخول
         function startCelebration() {
             for(let i=0; i<20; i++) {
                 setTimeout(() => {
-                    createFallingItem();
+                    createRose();
                 }, i * 150);
             }
         }
