@@ -4,220 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>It's My Birthday - فطومة</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #ffe6eb;
-            font-family: 'Tahoma', sans-serif;
-            overflow-x: hidden;
-            text-align: center;
-        }
-        /* تأثير الورود المتساقطة */
-        .rose {
-            position: fixed;
-            top: -10vh;
-            animation: fall linear infinite;
-            z-index: 999;
-            user-select: none;
-            pointer-events: none;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); }
-            100% { transform: translateY(110vh) rotate(360deg); }
-        }
-        /* واجهة كلمة السر */
-        #login-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .login-box {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
-            width: 85%;
-            max-width: 350px;
-        }
-        .login-box h3 {
-            color: #d63384;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-        .login-box input {
-            width: 80%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #ffb6c1;
-            border-radius: 25px;
-            text-align: center;
-            font-size: 16px;
-            outline: none;
-        }
-        .login-box button {
-            background-color: #d63384;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-        .login-box button:hover {
-            background-color: #c51162;
-        }
-
-        /* المحتوى الرئيسي */
-        #main-content {
-            display: none;
-            padding: 20px;
-        }
-        .card {
-            background: white;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 20px;
-            max-width: 600px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-        /* العداد التنازلي */
-        .countdown-title {
-            color: #d63384;
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .time-box {
-            background: #fff0f3;
-            padding: 10px;
-            border-radius: 10px;
-            min-width: 50px;
-            border: 1px solid #ffb6c1;
-        }
-        .time-box span {
-            display: block;
-            font-size: 18px;
-            font-weight: bold;
-            color: #d63384;
-        }
-        .time-box small {
-            font-size: 12px;
-            color: #666;
-        }
-        /* مشغل الأغاني الدائري */
-        .vinyl-container {
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .vinyl {
-            width: 100px;
-            height: 100px;
-            background: #222;
-            border-radius: 50%;
-            border: 5px solid #d63384;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: spin 4s linear infinite;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-        }
-        .vinyl-inner {
-            width: 30px;
-            height: 30px;
-            background: white;
-            border-radius: 50%;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        /* النصوص والبوست */
-        .post-text {
-            line-height: 1.8;
-            color: #444;
-            font-size: 15px;
-            white-space: pre-line;
-            text-align: right;
-            padding: 10px;
-        }
-        /* صور الذكريات */
-        .memory-img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 15px;
-            margin-top: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .date-badge {
-            color: #d63384;
-            font-weight: bold;
-            margin: 10px 0 20px 0;
-        }
-        /* التوقيع والواتس */
-        .footer {
-            margin: 30px 0;
-            font-size: 16px;
-            color: #333;
-        }
-        .footer a {
-            color: #25d366;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- واجهة الدخول -->
-    <div id="login-screen">
-        <div class="login-box">
-            <h3>دوسي هنا يا فطومه 💖</h3>
-            <input type="password" id="passcode" placeholder="اكتبي كلمة السر...">
-            <br>
-            <button onclick="checkPassword()">دخول</button>
-        </div>
-    </div>
-
-    <!-- المحتوى الرئيسي -->
-    <div id="main-content">
-        
-        <!-- العداد التنازلي -->
-        <div class="card">
-            <div class="countdown-title">فاضل علي اكتمال القمر 🎀🎉</div>
-            <div class="countdown" id="countdown">
-                <div class="time-box"><span id="days">00</span><small>يوم</small></div>
-                <div class="time-box"><span id="hours">00</span><small>ساعة</small></div>
-                <div classمن عيوني يا غالي! طلباتك أوامر يا خضري، عملت لك كود الويب المتكامل بالصفحة الأولى (صفحة كلمة السر "2008" وجملة "دوسي هنا يا فطومة") وبعد ما تفتح تدخل على الصفحة التانية اللي فيها ورود متساقطة، وعد تنازلي لحد يوم 19/10/2026 وتحتيه عبارة "فاضل علي اكتمال القمر 🎀🎉"، ومعاها قرص الأغنية الدوار (الذي يعمل بصيغة `ssstik.io_1790955861239.mp3`)، والنص الجميل اللي طلبته، والصور الأربع المرفقة مع تواريخها، وتوقيعك في الآخر مع زر الواتساب الشغال تمام.
-
-تفضل كود الويب الكامل لملف الـ `index.html`:
-
-```html
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عيد ميلاد سعيد يا فطومة</title>
-    <link href="[https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap)" rel="stylesheet">
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -231,26 +19,21 @@
             overflow-x: hidden;
             text-align: center;
         }
-        /* تأثير الورود المتساقطة */
-        .rose {
+        /* الورود والبالونات المتساقطة في الخلفية دائماً */
+        .rose, .balloon {
             position: fixed;
             top: -10vh;
             z-index: 999;
             user-select: none;
-            cursor: default;
+            pointer-events: none;
             animation: fall linear infinite;
         }
         @keyframes fall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) rotate(360deg);
-                opacity: 0.2;
-            }
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.3; }
         }
-        /* واجهة كلمة السر */
+
+        /* واجهة كلمة السر (واجهة عيد ميلاد فخمة) */
         #login-screen {
             position: fixed;
             top: 0;
@@ -266,37 +49,36 @@
         }
         .login-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 35px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             width: 100%;
             max-width: 380px;
+            border: 2px solid #ffccd5;
         }
         .login-card h2 {
             color: #d81b60;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 22px;
-        }
-        .input-group {
-            position: relative;
-            margin-bottom: 15px;
+            font-weight: bold;
         }
         .login-card input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 15px;
             border: 2px solid #ffb6c1;
             border-radius: 30px;
             outline: none;
             font-size: 16px;
             text-align: center;
-            transition: 0.3s;
+            margin-bottom: 15px;
+            background: #fff9fa;
         }
         .login-card input:focus {
             border-color: #d81b60;
         }
         .login-card button {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: #d81b60;
             color: white;
             border: none;
@@ -304,15 +86,15 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
             box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+            transition: 0.3s;
         }
         .login-card button:hover {
             background: #c2185b;
         }
         .error-msg {
             color: #ff3333;
-            font-size: 14px;
+            font-size: 13px;
             margin-top: 10px;
             display: none;
         }
@@ -325,58 +107,59 @@
             margin: 0 auto;
         }
         .header-title {
-            font-size: 24px;
+            font-size: 22px;
             color: #d81b60;
             margin: 20px 0;
             font-weight: bold;
         }
+
         /* العداد التنازلي */
+        .countdown-title {
+            font-size: 18px;
+            color: #b5174e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 8px;
+            margin-bottom: 25px;
         }
         .time-box {
             background: white;
             padding: 10px;
             border-radius: 12px;
-            min-width: 65px;
+            min-width: 60px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border: 1px solid #ffccd5;
         }
         .time-box span {
             display: block;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #d81b60;
         }
         .time-box label {
-            font-size: 12px;
+            font-size: 11px;
             color: #666;
         }
-        .countdown-title {
-            font-size: 18px;
-            color: #b5174e;
-            font-weight: bold;
-            margin-top: 15px;
-        }
 
-        /* مشغل الأغاني الدوار */
+        /* مشغل الأغاني الدوار تحت العداد */
         .music-player {
             background: white;
-            padding: 15px;
+            padding: 12px 20px;
             border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            margin: 25px 0;
+            margin: 20px 0 25px 0;
             border: 1px solid #ffccd5;
         }
         .album-art {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
             animation: rotateAlbum 6s linear infinite;
@@ -390,28 +173,24 @@
             background: #d81b60;
             color: white;
             border: none;
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.3s;
-        }
-        .play-btn:hover {
-            background: #c2185b;
         }
 
-        /* بوست عيد الميلاد والنصوص */
+        /* بوست عيد الميلاد */
         .birthday-post {
             background: white;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             line-height: 1.8;
-            font-size: 15px;
+            font-size: 14px;
             color: #444;
             margin-bottom: 25px;
             text-align: right;
@@ -419,7 +198,7 @@
             border-right: 4px solid #d81b60;
         }
 
-        /* حاوية الصور */
+        /* صور الذكريات */
         .images-section {
             display: flex;
             flex-direction: column;
@@ -440,15 +219,15 @@
         }
         .img-date {
             margin-top: 10px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             color: #d81b60;
         }
 
         /* التوقيع والواتساب */
         .footer-sig {
-            margin: 30px 0 10px;
-            font-size: 18px;
+            margin: 25px 0 10px;
+            font-size: 17px;
             font-weight: bold;
             color: #333;
         }
@@ -458,29 +237,23 @@
             gap: 8px;
             background: #25d366;
             color: white;
-            padding: 10px 25px;
+            padding: 10px 22px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             margin-bottom: 30px;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            transition: 0.3s;
-        }
-        .whatsapp-btn:hover {
-            background: #1ebe5d;
         }
     </style>
 </head>
 <body>
 
-    <!-- واجهة كلمة السر -->
+    <!-- واجهة كلمة السر (تتضمن ورود متساقطة في الخلفية) -->
     <div id="login-screen">
         <div class="login-card">
-            <h2>دوسي هنا يا فطومة</h2>
-            <div class="input-group">
-                <input type="password" id="pass-input" placeholder="اكتبي كلمة السر (2008)">
-            </div>
-            <button onclick="checkPassword()">دخول</button>
+            <h2>🎉 دوسي يا فطومة 💖</h2>
+            <input type="password" id="pass-input" placeholder="اكتبي كلمة السر...">
+            <button onclick="checkPassword()">دوسي هنا يا فاطمه 🎀</button>
             <div id="error-msg" class="error-msg">كلمة السر خطأ، جربي تاني يا فطومة!</div>
         </div>
     </div>
@@ -491,28 +264,16 @@
 
         <div class="countdown-title">فاضل علي اكتمال القمر 🎀🎉</div>
         <div class="countdown-container">
-            <div class="time-box">
-                <span id="days">00</span>
-                <label>يوم</label>
-            </div>
-            <div class="time-box">
-                <span id="hours">00</span>
-                <label>ساعة</label>
-            </div>
-            <div class="time-box">
-                <span id="minutes">00</span>
-                <label>دقيقة</label>
-            </div>
-            <div class="time-box">
-                <span id="seconds">00</span>
-                <label>ثانية</label>
-            </div>
+            <div class="time-box"><span id="days">00</span><label>يوم</label></div>
+            <div class="time-box"><span id="hours">00</span><label>ساعة</label></div>
+            <div class="time-box"><span id="minutes">00</span><label>دقيقة</label></div>
+            <div class="time-box"><span id="seconds">00</span><label>ثانية</label></div>
         </div>
 
-        <!-- مشغل الأغنية الدوار -->
+        <!-- مشغل الأغنية الدوار تحت العداد -->
         <div class="music-player">
             <button class="play-btn" id="playBtn" onclick="togglePlay()"><i class="fa-solid fa-play" id="playIcon"></i></button>
-            <span style="font-weight:600; font-size:14px; color:#d81b60;">موسيقى عيد الميلاد الخاصة بك 🤍</span>
+            <span style="font-weight:600; font-size:13px; color:#d81b60;">موسيقى عيد الميلاد الخاصة بك 🤍</span>
             <img src="IMG-20261002-WA0004.jpg" class="album-art" alt="Album Art">
         </div>
         <audio id="bgMusic" src="ssstik.io_1790955861239.mp3" preload="auto" loop></audio>
@@ -551,19 +312,20 @@
 
         <!-- التوقيع والواتساب -->
         <div class="footer-sig">تصميم 𝐻𝑜𝑠𝑠𝑎𝑚</div>
-        <a href="[https://api.whatsapp.com/send?phone=+201556446391](https://api.whatsapp.com/send?phone=+201556446391)" class="whatsapp-btn" target="_blank">
-            <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> تواصل معي عبر الواتساب
+        <a href="https://api.whatsapp.com/send?phone=+201556446391" class="whatsapp-btn" target="_blank">
+            <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> تواصل معي عبر الواتساب 💬
         </a>
     </div>
 
     <script>
         // التحقق من كلمة السر
         function checkPassword() {
-            const pass = document.getElementById('pass-input').value;
+            const pass = document.getElementById('pass-input').value.trim();
             const errorMsg = document.getElementById('error-msg');
             if(pass === "2008") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
+                startBalloons(); // إطلاق البالونات عند الدخول
             } else {
                 errorMsg.style.display = 'block';
             }
@@ -589,14 +351,9 @@
         function updateCountdown() {
             const now = new Date().getTime();
             const gap = targetDate - now;
-
             if(gap < 0) return;
 
-            const second = 1000;
-            const minute = second * 60;
-            const hour = minute * 60;
-            const day = hour * 24;
-
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
             const d = Math.floor(gap / day);
             const h = Math.floor((gap % day) / hour);
             const m = Math.floor((gap % hour) / minute);
@@ -609,21 +366,34 @@
         }
         setInterval(updateCountdown, 1000);
 
-        // إنشاء ورود متساقطة عشوائياً في الصفحة
+        // إنشاء ورود متساقطة في الخلفية دائماً (من أول واجهة)
         function createRose() {
             const rose = document.createElement('div');
             rose.classList.add('rose');
             rose.innerHTML = '🌹';
             rose.style.left = Math.random() * 100 + 'vw';
             rose.style.fontSize = (Math.random() * 15 + 15) + 'px';
-            rose.style.animationDuration = (Math.random() * 4 + 3) + 'secs';
+            rose.style.animationDuration = (Math.random() * 4 + 3) + 's';
             document.body.appendChild(rose);
-
-            setTimeout(() => {
-                rose.remove();
-            }, 7000);
+            setTimeout(() => rose.remove(), 7000);
         }
         setInterval(createRose, 400);
+
+        // إطلاق بالونات عند الدخول بعد كلمة السر
+        function startBalloons() {
+            for(let i=0; i<15; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.classList.add('balloon');
+                    balloon.innerHTML = '🎈';
+                    balloon.style.left = Math.random() * 100 + 'vw';
+                    balloon.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    balloon.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(balloon);
+                    setTimeout(() => balloon.remove(), 5000);
+                }, i * 200);
+            }
+        }
     </script>
 </body>
 </html>
